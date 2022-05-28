@@ -19,7 +19,7 @@ def pochta_otpravka():
         password = 'endga34nogam44543421'
 
         recipients = ['danyamelman@yandex.ru']
-        sender = 'mail4studying@yandex.ru'
+        sender = user
         subject = 'Тема сообщения'
         text = 'Текст сообщения'
         html = '<html><head></head><body><p>' + text + '</p></body></html>'
