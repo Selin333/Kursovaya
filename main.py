@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from platform import python_version
+from email.header import decode_header
 
 import imaplib
 import email
@@ -54,7 +55,7 @@ def pochta_otpravka():
         print('Письмо отправлено')
     except:
         print('error')
-# pochta_otpravka()
+pochta_otpravka()
 def pochta_read():
     mail = imaplib.IMAP4_SSL('imap.yandex.ru')
     mail.login('danyamelman@yandex.ru', 'roHB5m8kmy9sdKUm52QoAX2')
@@ -72,22 +73,22 @@ def pochta_read():
     raw_email_string = raw_email.decode('utf-8')
 
     email_message = email.message_from_string(raw_email_string)
-    print(email_message)
+    # print(email_message)
+    print(email_message['To'])
+    print(email.utils.parseaddr(email_message['From']))
+    print(email_message['Date'])
 
-    # print(email_message['To'])
-    # print(email.utils.parseaddr(email_message['From']))
-    # print(email_message['Date'])
-    # print(email_message['Subject'])
-    # print(email_message['Message-Id'])
-    # print(email_message['Attachment'])
 
     email_message = email.message_from_string(raw_email_string)
-
+    content_email = []
     if email_message.is_multipart():
         for payload in email_message.get_payload():
             body = payload.get_payload(decode=True).decode('utf-8')
+            content_email.append(body)
             print(body)
     else:
         body = email_message.get_payload(decode=True).decode('utf-8')
         print(body)
+    print(content_email)
+
 pochta_read()
