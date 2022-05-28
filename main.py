@@ -53,5 +53,5 @@ def pochta_otpravka():
         mail.quit()
         print('Письмо отправлено')
     except:
-        print('error')
+        print('errror')
 # pochta_otpravka()
