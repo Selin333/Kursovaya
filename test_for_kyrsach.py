@@ -377,13 +377,13 @@ def decoding_cascade(encoded_string_finished):
 # print(bbbb)
 # print('_______________')
 #
-aaaa1 = encoding_svertoch('попа')
-bbbb1 = decoding_svertoch(aaaa1)
+# aaaa1 = encoding_svertoch('попа')
+# bbbb1 = decoding_svertoch(aaaa1)
 # print(aaaa1)
 # print(bbbb1)
-print('_______________')
+# print('_______________')
 #
-aaaa2 = encoding_cascade('попа')
+# aaaa2 = encoding_cascade('попа')
 # print(aaaa2)
-cascad_3 = decoding_cascade(aaaa2)
+# cascad_3 = decoding_cascade(aaaa2)
 # print(cascad_3)

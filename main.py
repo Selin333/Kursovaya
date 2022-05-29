@@ -35,7 +35,6 @@ def file(encoded_string):
     with open('file11.txt','w+',encoding="utf-8") as f:
         f.write(encoded_string)
         print('Записанно в файл:')
-        print(encoded_string)
 
 
 
@@ -85,6 +84,7 @@ class mywindow(QtWidgets.QMainWindow):
             print(encode_str)
             decode_str = test_for_kyrsach.decoding_svertoch(encode_str)
             print(decode_str)
+
             file(encode_str)
 
 
@@ -112,6 +112,33 @@ class mywindow(QtWidgets.QMainWindow):
 
     def btnClicked_9(self):
         print('Декод')
+        with open('file11.txt', 'r+', encoding="utf-8") as f:
+            encoded_string = f.read()
+
+        try:
+            decoded_string = test_for_kyrsach.decode_hemming(encoded_string)
+            self.ui.lineEdit_11.setText(decoded_string)
+            print(decoded_string)
+        except:
+            self.ui.lineEdit_11.setText('---------')
+
+        try:
+            decoded_string = test_for_kyrsach.decoding_svertoch(encoded_string)
+            self.ui.lineEdit_12.setText(decoded_string)
+            print(decoded_string)
+        except:
+            self.ui.lineEdit_12.setText('---------')
+
+        try:
+            decoded_string = test_for_kyrsach.decoding_cascade(encoded_string)
+            self.ui.lineEdit_13.setText(decoded_string)
+            print(decoded_string)
+        except:
+            self.ui.lineEdit_13.setText('---------')
+
+
+
+
 
     def btnClicked_5(self):
         import PyQt5
@@ -149,8 +176,10 @@ class mywindow(QtWidgets.QMainWindow):
         else:
             print('Чтение:\n................\n')
         text = pochta_read(mail_imap,mail_login,mail_passwd)
+        self.ui.plainTextEdit.clear()
 
         self.ui.plainTextEdit.insertPlainText(text[2])
+        file(text[2])
 
 def pochta_otpravka(server,user,password,recipients,subject,text,filepath):
     try:
