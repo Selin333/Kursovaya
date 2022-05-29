@@ -62,12 +62,18 @@ class mywindow(QtWidgets.QMainWindow):
                 Error('Заполните все поля')
             else:
                 print('good')
+
                 pochta_otpravka(server, user, password, recipients, subject, text, filepath[0])
+
+
     def btnClicked_2(self):
         mail_imap = self.ui.lineEdit_7.text()
         mail_login = self.ui.lineEdit_8.text()
         mail_passwd = self.ui.lineEdit_9.text()
-
+        if len(mail_imap) == 0 or len(mail_login) == 0 or len(mail_passwd) == 0:
+            Error('Заполните все поля')
+        else:
+            print('zzzzz')
         pochta_read(mail_imap,mail_login,mail_passwd)
 
 
@@ -107,41 +113,47 @@ def pochta_otpravka(server,user,password,recipients,subject,text,filepath):
         mail.quit()
         print('Письмо отправлено')
     except:
-        print('error')
+        Error('не правильно заполнены поля'
+        )
 def pochta_read(mail_imap,mail_login,mail_passwd):
-    mail = imaplib.IMAP4_SSL(mail_imap)
-    mail.login(mail_login, mail_passwd)
+    try:
 
-    mail.list()
-    mail.select("inbox")
-    result, data = mail.search(None, "ALL")
+        mail = imaplib.IMAP4_SSL(mail_imap)
+        mail.login(mail_login, mail_passwd)
 
-    ids = data[0]
-    id_list = ids.split()
-    latest_email_id = id_list[-1]
+        mail.list()
+        mail.select("inbox")
+        result, data = mail.search(None, "ALL")
 
-    result, data = mail.fetch(latest_email_id, "(RFC822)")
-    raw_email = data[0][1]
-    raw_email_string = raw_email.decode('utf-8')
+        ids = data[0]
+        id_list = ids.split()
+        latest_email_id = id_list[-1]
 
-    email_message = email.message_from_string(raw_email_string)
-    # print(email_message)
-    print(email_message['To'])
-    print(email.utils.parseaddr(email_message['From']))
-    print(email_message['Date'])
+        result, data = mail.fetch(latest_email_id, "(RFC822)")
+        raw_email = data[0][1]
+        raw_email_string = raw_email.decode('utf-8')
+
+        email_message = email.message_from_string(raw_email_string)
+        # print(email_message)
+        print(email_message['To'])
+        print(email.utils.parseaddr(email_message['From']))
+        print(email_message['Date'])
 
 
-    email_message = email.message_from_string(raw_email_string)
-    content_email = []
-    if email_message.is_multipart():
-        for payload in email_message.get_payload():
-            body = payload.get_payload(decode=True).decode('utf-8')
-            content_email.append(body)
+        email_message = email.message_from_string(raw_email_string)
+        content_email = []
+        if email_message.is_multipart():
+            for payload in email_message.get_payload():
+                body = payload.get_payload(decode=True).decode('utf-8')
+                content_email.append(body)
+                print(body)
+        else:
+            body = email_message.get_payload(decode=True).decode('utf-8')
             print(body)
-    else:
-        body = email_message.get_payload(decode=True).decode('utf-8')
-        print(body)
-    print(content_email)
+        print(content_email)
+    except:
+        Error('не правильно заполнены поля'
+        )
 
 
 
