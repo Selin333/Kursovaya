@@ -1,8 +1,6 @@
 import random
 import binascii
-import numpy as np
-from sympy import *
-import math
+
 
 
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
@@ -117,13 +115,13 @@ def decode_hemming(arr):
     for i in reversed(range(r)):
         spisok.pop(2 ** i - 1)
     arr = ''.join(spisok)
+    print('arr', arr)
     arr = text_from_bits(arr)
 
     return arr
 
 
 def encoding_svertoch(primal_text):
-    global spisok_text_to_bit
 
     print(primal_text)
     summators = [[0, 1], [1, 2]]
@@ -132,9 +130,14 @@ def encoding_svertoch(primal_text):
         bits = bin(int(binascii.hexlify(text.encode(encoding, errors)), 16))[2:]
         return bits.zfill(8 * ((len(bits) + 7) // 8))
 
-    primal_text += '\n'
-    spisok_text_to_bit = text_to_bits(primal_text)
-    print(spisok_text_to_bit)
+    if primal_text.isdigit():
+        primal_text += '\n'
+        spisok_text_to_bit = primal_text
+        print(spisok_text_to_bit)
+    else:
+        primal_text += '\n'
+        spisok_text_to_bit = text_to_bits(primal_text)
+        print(spisok_text_to_bit)
     # вводим элементы которые потребуются
 
     spisok_polinomov = []
@@ -201,7 +204,6 @@ def encoding_svertoch(primal_text):
 
 def decoding_svertoch(encoded_string_finished):
     # обьявляем переменные
-
     registrs = []
     kol_registrov = 0
 
@@ -253,20 +255,83 @@ def decoding_svertoch(encoded_string_finished):
     return decoded_primal_text
 
 
-# def encoding_matrix():
-#
-#
-#
-# def decoding_matrix():
+def encoding_cascade(primal_text):
+    cascad_1 = encode_hemming(primal_text)
+    cascad_2 = encoding_svertoch(cascad_1)
+    return cascad_2
 
 
 
-aaaa = encode_hemming('привет')
+def decoding_cascade(encoded_string_finished):
+
+    # обьявляем переменные
+    registrs = []
+    kol_registrov = 0
+
+    summators = [[0, 1], [1, 2]]
+    decoded_string = ''
+    # находим кол-во регистров по максимальному элементу в сумматоре и обнуляем их
+    for i in summators:
+        if kol_registrov < max(i):
+            kol_registrov = max(i)
+
+    for i in range(kol_registrov + 1):
+        registrs.append(0)
+
+    # функция сдвига регистров в парво
+    def append_zero():
+        for i in reversed(range(len(registrs))):
+            registrs[i] = registrs[i - 1]
+        registrs[0] = 0
+        return registrs
+
+    # функция создание проверочных битов
+    def calc_prov_bits():
+        global proverochnie_bits
+        proverochnie_bits = ''
+        for j in range(len(summators)):
+            c = 0
+            for m in range(len(summators[j])):
+                c += registrs[summators[j][m]]
+            if c % 2 == 1:
+                proverochnie_bits += ''.join('1')
+            elif c % 2 == 0:
+                proverochnie_bits += ''.join('0')
+        return proverochnie_bits
+
+    # функция декодирование строки
+    for i in range(len(encoded_string_finished)):
+        append_zero()
+        calc_prov_bits()
+        if proverochnie_bits != encoded_string_finished[i]:
+            registrs[0] = 1
+            decoded_string += ''.join('1')
+        elif proverochnie_bits == encoded_string_finished[i]:
+            decoded_string += ''.join('0')
+
+    decoded_primal_text = decoded_string
+
+    print(decoded_primal_text)
+
+    cascad_4 = decode_hemming(decoded_primal_text)
+    return cascad_4
+
+
+
+aaaa = encode_hemming('попа')
 print(aaaa)
 bbbb = decode_hemming(aaaa)
 print(bbbb)
-
+print('_______________')
+#
 aaaa1 = encoding_svertoch('попа')
 bbbb1 = decoding_svertoch(aaaa1)
 print(aaaa1)
 print(bbbb1)
+print('_______________')
+
+aaaa2 = encoding_cascade('попаsa')
+cascad_3 = decoding_cascade(aaaa2)
+print(cascad_3, type(cascad_3))
+
+
