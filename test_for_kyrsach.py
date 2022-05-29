@@ -19,8 +19,6 @@ def int2bytes(i):
     return binascii.unhexlify(hex_string.zfill(n + (n & 1)))
 
 
-
-
 def calc_izbitochnie_bits(m):
     # Формула для подсчета количество избыточных битов: 2 ^ r >= m + r + 1
 
@@ -122,7 +120,6 @@ def decode_hemming(arr):
 
 
 def encoding_svertoch(primal_text):
-
     # print(primal_text)
     summators = [[0, 1], [1, 2]]
 
@@ -280,7 +277,7 @@ def encoding_cascade(primal_text):
 
     # print("Введённая последовательность в бинарном представлении: ",spis_posled)
 
-    poFactu = []
+    spisok_zakodir_posled = []
     registr = np.zeros(3)
 
     dvoinoySpisElemIndex = [['0', '1'], ['1', '2']]
@@ -289,7 +286,7 @@ def encoding_cascade(primal_text):
     # print("Состояния регистра:")
     # print(registr)
 
-    poFactu = []
+    spisok_zakodir_posled = []
     for i in range(len(spis_posled)):
         registr = np.delete(registr, 2)
         registr = np.insert(registr, 0, spis_posled[i])
@@ -300,20 +297,20 @@ def encoding_cascade(primal_text):
             for k in dvoinoySpisElemIndex[j]:
                 spisElemSlogaem.append(registr[int(k)])
             a = sum(spisElemSlogaem)
-            poFactu.append(a % 2)
+            spisok_zakodir_posled.append(a % 2)
 
-    for i in range(len(poFactu)):
-        poFactu[i] = int(poFactu[i])
-        poFactu[i] = str(poFactu[i])
+    for i in range(len(spisok_zakodir_posled)):
+        spisok_zakodir_posled[i] = int(spisok_zakodir_posled[i])
+        spisok_zakodir_posled[i] = str(spisok_zakodir_posled[i])
+
+
 
     zakodir = []
 
-    for i in range(0, len(poFactu), n):
-        zakodir.append("".join(poFactu[i:i + n]))
+    for i in range(0, len(spisok_zakodir_posled), n):
+        zakodir.append("".join(spisok_zakodir_posled[i:i + n]))
 
     return zakodir
-
-
 
 
 def decoding_cascade(encoded_string_finished):
@@ -372,22 +369,19 @@ def decoding_cascade(encoded_string_finished):
     return cascad_4
 
 
-
-aaaa = encode_hemming('попа')
-print(aaaa)
-bbbb = decode_hemming(aaaa)
-print(bbbb)
-print('_______________')
+# aaaa = encode_hemming('попа')
+# print(aaaa)
+# bbbb = decode_hemming(aaaa)
+# print(bbbb)
+# print('_______________')
 #
-aaaa1 = encoding_svertoch('попа')
-bbbb1 = decoding_svertoch(aaaa1)
-print(aaaa1)
-print(bbbb1)
-print('_______________')
-
-aaaa2 = encoding_cascade('попа')
-print(aaaa2)
-cascad_3 = decoding_cascade(aaaa2)
-print(cascad_3)
-
-
+# aaaa1 = encoding_svertoch('попа')
+# bbbb1 = decoding_svertoch(aaaa1)
+# print(aaaa1)
+# print(bbbb1)
+# print('_______________')
+#
+# aaaa2 = encoding_cascade('попа')
+# print(aaaa2)
+# cascad_3 = decoding_cascade(aaaa2)
+# print(cascad_3)
