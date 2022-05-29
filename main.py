@@ -62,12 +62,14 @@ class mywindow(QtWidgets.QMainWindow):
                 Error('Заполните все поля')
             else:
                 print('good')
-                #pochta_otpravka(server, user, password, recipients, subject, text, filepath[0])
+                pochta_otpravka(server, user, password, recipients, subject, text, filepath[0])
     def btnClicked_2(self):
-        mail_imap = self.ui.lineEdit.text()
+        mail_imap = self.ui.lineEdit_7.text()
+        mail_login = self.ui.lineEdit_8.text()
+        mail_passwd = self.ui.lineEdit_9.text()
 
-        # pochta_read(mail_imap)
-        pass
+        pochta_read(mail_imap,mail_login,mail_passwd)
+
 
 def pochta_otpravka(server,user,password,recipients,subject,text,filepath):
     try:
@@ -106,9 +108,9 @@ def pochta_otpravka(server,user,password,recipients,subject,text,filepath):
         print('Письмо отправлено')
     except:
         print('error')
-def pochta_read(mail_imap):
-    mail = imaplib.IMAP4_SSL('imap.yandex.ru')
-    mail.login('danyamelman@yandex.ru', 'roHB5m8kmy9sdKUm52QoAX2')
+def pochta_read(mail_imap,mail_login,mail_passwd):
+    mail = imaplib.IMAP4_SSL(mail_imap)
+    mail.login(mail_login, mail_passwd)
 
     mail.list()
     mail.select("inbox")
