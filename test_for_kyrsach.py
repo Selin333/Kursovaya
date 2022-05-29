@@ -194,12 +194,13 @@ def encoding_svertoch(primal_text):
     encoded_string_finished = encoded_string_finished[:-1]
     # print(encoded_string_finished)
     encoded_string_finished = encoded_string_finished.split('.')
-    # print(encoded_string_finished)
+    encoded_string_finished = ''.join(encoded_string_finished)
 
     return encoded_string_finished
 
 
 def decoding_svertoch(encoded_string_finished):
+    encoded_string_finished = [a + b for a, b in zip(encoded_string_finished[::2], encoded_string_finished[1::2])]
     # обьявляем переменные
     registrs = []
     kol_registrov = 0
@@ -309,12 +310,13 @@ def encoding_cascade(primal_text):
 
     for i in range(0, len(spisok_zakodir_posled), n):
         zakodir.append("".join(spisok_zakodir_posled[i:i + n]))
+    zakodir = ''.join(zakodir)
 
     return zakodir
 
 
 def decoding_cascade(encoded_string_finished):
-    # print(encoded_string_finished)
+    encoded_string_finished = [a + b for a, b in zip(encoded_string_finished[::2], encoded_string_finished[1::2])]
     # обьявляем переменные
     registrs = []
     kol_registrov = 0
@@ -375,13 +377,13 @@ def decoding_cascade(encoded_string_finished):
 # print(bbbb)
 # print('_______________')
 #
-# aaaa1 = encoding_svertoch('попа')
-# bbbb1 = decoding_svertoch(aaaa1)
+aaaa1 = encoding_svertoch('попа')
+bbbb1 = decoding_svertoch(aaaa1)
 # print(aaaa1)
 # print(bbbb1)
-# print('_______________')
+print('_______________')
 #
-# aaaa2 = encoding_cascade('попа')
+aaaa2 = encoding_cascade('попа')
 # print(aaaa2)
-# cascad_3 = decoding_cascade(aaaa2)
+cascad_3 = decoding_cascade(aaaa2)
 # print(cascad_3)
