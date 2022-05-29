@@ -19,8 +19,6 @@ def int2bytes(i):
     return binascii.unhexlify(hex_string.zfill(n + (n & 1)))
 
 
-
-
 def calc_izbitochnie_bits(m):
     # Формула для подсчета количество избыточных битов: 2 ^ r >= m + r + 1
 
@@ -122,7 +120,6 @@ def decode_hemming(arr):
 
 
 def encoding_svertoch(primal_text):
-
     # print(primal_text)
     summators = [[0, 1], [1, 2]]
 
@@ -314,8 +311,6 @@ def encoding_cascade(primal_text):
     return zakodir
 
 
-
-
 def decoding_cascade(encoded_string_finished):
     # print(encoded_string_finished)
     # обьявляем переменные
@@ -372,7 +367,6 @@ def decoding_cascade(encoded_string_finished):
     return cascad_4
 
 
-
 aaaa = encode_hemming('попа')
 print(aaaa)
 bbbb = decode_hemming(aaaa)
@@ -389,5 +383,3 @@ aaaa2 = encoding_cascade('попа')
 print(aaaa2)
 cascad_3 = decoding_cascade(aaaa2)
 print(cascad_3)
-
-
