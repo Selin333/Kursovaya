@@ -5,26 +5,77 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from platform import python_version
-from email.header import decode_header
 
 import imaplib
 import email
+from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QLabel
+from PyQt5 import QtWidgets
+from PyQt5.QtWinExtras import QtWin
+from PyQt5.QtWidgets import QDialog, QPushButton, QApplication
 
 
-def pochta_otpravka():
+myappid = 'kursach'
+QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
+from GUI import Ui_MainWindow  # импорт ui
+import sys
+
+
+def Error(info):
+    error = QMessageBox()
+    error.setIcon(QMessageBox.Critical)
+    error.setText("Ошибка")
+    error.setInformativeText(info)
+    error.setWindowTitle("Ой-йой")
+    error.exec_()
+class mywindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(mywindow, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.ui.pushButton_3.clicked.connect(self.btnClicked)
+        self.ui.pushButton_4.clicked.connect(self.btnClicked_2)
+        self.ui.pushButton_5.clicked.connect(self.btnClicked_5)
+
+
+
+    def btnClicked_5(self):
+        import PyQt5
+        global filepath
+
+        filepath = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self, 'Open File', 'D:\\111\\Kursovaya', 'txt file(*.txt)')
+
+    def btnClicked(self):
+        if not 'filepath' in globals() :
+            Error('файл не выбран')
+        elif len(filepath[0]) == 0:
+            Error('файл не выбран')
+        else:
+
+            server = self.ui.lineEdit.text()
+            user = self.ui.lineEdit_2.text()
+            password = self.ui.lineEdit_3.text()
+            recipients = self.ui.lineEdit_4.text()
+            subject = self.ui.lineEdit_5.text()
+            text = self.ui.lineEdit_6.text()
+            if len(server) ==0 or len(user) ==0 or len(password) ==0 or len(recipients) ==0 or len(subject) ==0 or len(text) ==0:
+
+                Error('Заполните все поля')
+            else:
+                print('good')
+                #pochta_otpravka(server, user, password, recipients, subject, text, filepath[0])
+    def btnClicked_2(self):
+        mail_imap = self.ui.lineEdit.text()
+
+        # pochta_read(mail_imap)
+        pass
+
+def pochta_otpravka(server,user,password,recipients,subject,text,filepath):
     try:
 
-        server = 'smtp.yandex.ru'
-        user = 'mail4studying@yandex.ru'
-        password = 'endga34nogam44543421'
-
-        recipients = ['danyamelman@yandex.ru']
         sender = user
-        subject = 'Тема сообщения'
-        text = 'Текст сообщения'
+
         html = '<html><head></head><body><p>' + text + '</p></body></html>'
 
-        filepath = "D:\\111\\file.txt"
         basename = os.path.basename(filepath)
         filesize = os.path.getsize(filepath)
 
@@ -55,8 +106,7 @@ def pochta_otpravka():
         print('Письмо отправлено')
     except:
         print('error')
-pochta_otpravka()
-def pochta_read():
+def pochta_read(mail_imap):
     mail = imaplib.IMAP4_SSL('imap.yandex.ru')
     mail.login('danyamelman@yandex.ru', 'roHB5m8kmy9sdKUm52QoAX2')
 
@@ -91,4 +141,9 @@ def pochta_read():
         print(body)
     print(content_email)
 
-pochta_read()
+
+
+app = QtWidgets.QApplication([])
+application = mywindow()
+application.show()
+sys.exit(app.exec())

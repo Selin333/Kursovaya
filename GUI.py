@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1058, 747)
+        MainWindow.resize(1053, 747)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
@@ -111,6 +111,9 @@ class Ui_MainWindow(object):
         self.label_9 = QtWidgets.QLabel(self.tab_11)
         self.label_9.setGeometry(QtCore.QRect(570, 200, 131, 16))
         self.label_9.setObjectName("label_9")
+        self.pushButton_5 = QtWidgets.QPushButton(self.tab_11)
+        self.pushButton_5.setGeometry(QtCore.QRect(40, 360, 111, 51))
+        self.pushButton_5.setObjectName("pushButton_5")
         self.tabWidget_2.addTab(self.tab_11, "")
         self.tab_12 = QtWidgets.QWidget()
         self.tab_12.setObjectName("tab_12")
@@ -156,9 +159,8 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "Логин"))
         self.lineEdit_9.setText(_translate("MainWindow", "roHB5m8kmy9sdKUm52QoAX2"))
         self.label_9.setText(_translate("MainWindow", "Пароль"))
+        self.pushButton_5.setText(_translate("MainWindow", "Выбрать файл"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_11), _translate("MainWindow", "Отправка по почте"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_12), _translate("MainWindow", "Декодирование"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Отправка по почте"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), _translate("MainWindow", "Декодирование"))
-
-
