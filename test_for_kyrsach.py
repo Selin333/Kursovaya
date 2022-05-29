@@ -1,6 +1,6 @@
 import random
 import binascii
-
+import numpy as np
 
 
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
@@ -86,7 +86,7 @@ def detecterror(arr, nr):
 
 def encode_hemming(primal_text):
     data = text_to_bits(primal_text)
-    print(data)
+    # print(data)
     # вычислить количество избыточных битов
     r = calc_izbitochnie_bits(len(data))
 
@@ -97,10 +97,10 @@ def encode_hemming(primal_text):
     arr = calc_proverochnie_bits(arr, r)
 
     # Внести ошибку
-    print(arr)
+    # print(arr)
     num_bit = random.randint(1, len(arr))
     arr = '{0}{1}{2}'.format(arr[:num_bit - 1], int(arr[num_bit - 1]) ^ 1, arr[num_bit:])
-    print(arr)
+    # print(arr)
     return arr
 
 
@@ -115,7 +115,7 @@ def decode_hemming(arr):
     for i in reversed(range(r)):
         spisok.pop(2 ** i - 1)
     arr = ''.join(spisok)
-    print('arr', arr)
+    # print('arr', arr)
     arr = text_from_bits(arr)
 
     return arr
@@ -123,7 +123,7 @@ def decode_hemming(arr):
 
 def encoding_svertoch(primal_text):
 
-    print(primal_text)
+    # print(primal_text)
     summators = [[0, 1], [1, 2]]
 
     def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
@@ -133,11 +133,11 @@ def encoding_svertoch(primal_text):
     if primal_text.isdigit():
         primal_text += '\n'
         spisok_text_to_bit = primal_text
-        print(spisok_text_to_bit)
+        # print(spisok_text_to_bit)
     else:
         primal_text += '\n'
         spisok_text_to_bit = text_to_bits(primal_text)
-        print(spisok_text_to_bit)
+        # print(spisok_text_to_bit)
     # вводим элементы которые потребуются
 
     spisok_polinomov = []
@@ -149,8 +149,8 @@ def encoding_svertoch(primal_text):
         if spisok_text_to_bit[i] == '1':
             spisok_indeksov_edinic.append(i)
 
-    print(spisok_indeksov_edinic)
-    print(summators)
+    # print(spisok_indeksov_edinic)
+    # print(summators)
 
     # делам "умножение полиномов"
     for i in range(len(summators)):
@@ -168,7 +168,7 @@ def encoding_svertoch(primal_text):
                 f.append(j)
         f = list(set(f))
         spisok_polinomov.append(f)
-    print(spisok_polinomov)
+    # print(spisok_polinomov)
 
     # нахождение макс элемента из массива полиномов
     encoded_string = []
@@ -190,14 +190,14 @@ def encoding_svertoch(primal_text):
     # Собираем в красивую конструкцию и выводим из под функции
     global encoded_string_finished
     encoded_string_finished = ''
-    print(encoded_string)
+    # print(encoded_string)
     for j in range(len(encoded_string)):
         encoded_string_finished += ''.join(encoded_string[j]) + '.'
     # каждый символ заносим в функцию возращая список закодированных символов
     encoded_string_finished = encoded_string_finished[:-1]
-    print(encoded_string_finished)
+    # print(encoded_string_finished)
     encoded_string_finished = encoded_string_finished.split('.')
-    print(encoded_string_finished)
+    # print(encoded_string_finished)
 
     return encoded_string_finished
 
@@ -251,19 +251,73 @@ def decoding_svertoch(encoded_string_finished):
     decoded_string = decoded_string[:-1]
 
     decoded_primal_text = text_from_bits(decoded_string)
-    print(decoded_primal_text)
+    # print(decoded_primal_text)
     return decoded_primal_text
 
 
 def encoding_cascade(primal_text):
     cascad_1 = encode_hemming(primal_text)
-    cascad_2 = encoding_svertoch(cascad_1)
-    return cascad_2
+
+    # print(cascad_1)
+    n = 2
+
+    if cascad_1.isdigit():
+        # cascad_1 += '\n'
+        spisok_text_to_bit = cascad_1
+        # print(spisok_text_to_bit)
+        # print('true')
+    else:
+        # cascad_1 += '\n'
+        spisok_text_to_bit = text_to_bits(cascad_1)
+        # print(spisok_text_to_bit)
+    # вводим элементы которые потребуются
+
+    spis_posled = []
+    for i in range(len(spisok_text_to_bit)):
+        spis_posled.append(spisok_text_to_bit[i])
+
+    # print(spisok_text_to_bit)
+
+    # print("Введённая последовательность в бинарном представлении: ",spis_posled)
+
+    poFactu = []
+    registr = np.zeros(3)
+
+    dvoinoySpisElemIndex = [['0', '1'], ['1', '2']]
+
+    # print("Индексы слогаемых: ",dvoinoySpisElemIndex)
+    # print("Состояния регистра:")
+    # print(registr)
+
+    poFactu = []
+    for i in range(len(spis_posled)):
+        registr = np.delete(registr, 2)
+        registr = np.insert(registr, 0, spis_posled[i])
+        # print(registr)
+
+        for j in range(len(dvoinoySpisElemIndex)):
+            spisElemSlogaem = []
+            for k in dvoinoySpisElemIndex[j]:
+                spisElemSlogaem.append(registr[int(k)])
+            a = sum(spisElemSlogaem)
+            poFactu.append(a % 2)
+
+    for i in range(len(poFactu)):
+        poFactu[i] = int(poFactu[i])
+        poFactu[i] = str(poFactu[i])
+
+    zakodir = []
+
+    for i in range(0, len(poFactu), n):
+        zakodir.append("".join(poFactu[i:i + n]))
+
+    return zakodir
+
 
 
 
 def decoding_cascade(encoded_string_finished):
-
+    # print(encoded_string_finished)
     # обьявляем переменные
     registrs = []
     kol_registrov = 0
@@ -309,9 +363,10 @@ def decoding_cascade(encoded_string_finished):
         elif proverochnie_bits == encoded_string_finished[i]:
             decoded_string += ''.join('0')
 
+    # print(decoded_string)
     decoded_primal_text = decoded_string
 
-    print(decoded_primal_text)
+    # print(decoded_primal_text)
 
     cascad_4 = decode_hemming(decoded_primal_text)
     return cascad_4
@@ -330,8 +385,9 @@ print(aaaa1)
 print(bbbb1)
 print('_______________')
 
-aaaa2 = encoding_cascade('попаsa')
+aaaa2 = encoding_cascade('попа')
+print(aaaa2)
 cascad_3 = decoding_cascade(aaaa2)
-print(cascad_3, type(cascad_3))
+print(cascad_3)
 
 
