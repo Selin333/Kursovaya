@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1075</width>
-    <height>721</height>
+    <width>1021</width>
+    <height>661</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>10</y>
       <width>1041</width>
       <height>691</height>
@@ -97,6 +97,27 @@
        </rect>
       </property>
      </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-60</y>
+        <width>1181</width>
+        <height>741</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">image: url(:/newPrefix/bck.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <zorder>label_15</zorder>
+     <zorder>pushButton_6</zorder>
+     <zorder>pushButton_7</zorder>
+     <zorder>pushButton_8</zorder>
+     <zorder>lineEdit_10</zorder>
     </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -211,7 +232,7 @@
          <rect>
           <x>10</x>
           <y>60</y>
-          <width>171</width>
+          <width>181</width>
           <height>31</height>
          </rect>
         </property>
@@ -287,9 +308,9 @@
        <widget class="QLineEdit" name="lineEdit_7">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>70</y>
-          <width>141</width>
+          <x>360</x>
+          <y>60</y>
+          <width>191</width>
           <height>31</height>
          </rect>
         </property>
@@ -301,8 +322,8 @@
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>130</y>
-          <width>171</width>
+          <y>110</y>
+          <width>191</width>
           <height>31</height>
          </rect>
         </property>
@@ -313,8 +334,8 @@
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>210</x>
-          <y>110</y>
+          <x>200</x>
+          <y>120</y>
           <width>131</width>
           <height>16</height>
          </rect>
@@ -326,8 +347,8 @@
        <widget class="QLabel" name="label_3">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>160</y>
+          <x>200</x>
+          <y>170</y>
           <width>131</width>
           <height>16</height>
          </rect>
@@ -352,8 +373,8 @@
        <widget class="QLabel" name="label_5">
         <property name="geometry">
          <rect>
-          <x>210</x>
-          <y>280</y>
+          <x>200</x>
+          <y>270</y>
           <width>131</width>
           <height>16</height>
          </rect>
@@ -391,8 +412,8 @@
        <widget class="QLabel" name="label_8">
         <property name="geometry">
          <rect>
-          <x>570</x>
-          <y>140</y>
+          <x>560</x>
+          <y>120</y>
           <width>131</width>
           <height>16</height>
          </rect>
@@ -404,9 +425,9 @@
        <widget class="QLineEdit" name="lineEdit_9">
         <property name="geometry">
          <rect>
-          <x>340</x>
-          <y>190</y>
-          <width>201</width>
+          <x>360</x>
+          <y>160</y>
+          <width>191</width>
           <height>31</height>
          </rect>
         </property>
@@ -417,8 +438,8 @@
        <widget class="QLabel" name="label_9">
         <property name="geometry">
          <rect>
-          <x>570</x>
-          <y>200</y>
+          <x>560</x>
+          <y>170</y>
           <width>131</width>
           <height>16</height>
          </rect>
@@ -444,12 +465,51 @@
         <property name="geometry">
          <rect>
           <x>570</x>
-          <y>230</y>
-          <width>451</width>
-          <height>231</height>
+          <y>240</y>
+          <width>411</width>
+          <height>211</height>
          </rect>
         </property>
        </widget>
+       <widget class="QLabel" name="label_13">
+        <property name="geometry">
+         <rect>
+          <x>-10</x>
+          <y>-50</y>
+          <width>1181</width>
+          <height>741</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">image: url(:/newPrefix/bck.png);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <zorder>label_13</zorder>
+       <zorder>pushButton_3</zorder>
+       <zorder>pushButton_4</zorder>
+       <zorder>label</zorder>
+       <zorder>lineEdit</zorder>
+       <zorder>lineEdit_2</zorder>
+       <zorder>lineEdit_3</zorder>
+       <zorder>lineEdit_4</zorder>
+       <zorder>lineEdit_5</zorder>
+       <zorder>lineEdit_6</zorder>
+       <zorder>lineEdit_7</zorder>
+       <zorder>lineEdit_8</zorder>
+       <zorder>label_2</zorder>
+       <zorder>label_3</zorder>
+       <zorder>label_4</zorder>
+       <zorder>label_5</zorder>
+       <zorder>label_6</zorder>
+       <zorder>label_7</zorder>
+       <zorder>label_8</zorder>
+       <zorder>lineEdit_9</zorder>
+       <zorder>label_9</zorder>
+       <zorder>pushButton_5</zorder>
+       <zorder>plainTextEdit</zorder>
       </widget>
       <widget class="QWidget" name="tab_12">
        <attribute name="title">
@@ -471,6 +531,11 @@
         <height>121</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Декодирование</string>
       </property>
@@ -478,41 +543,46 @@
      <widget class="QLineEdit" name="lineEdit_11">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>240</y>
-        <width>331</width>
-        <height>22</height>
+        <x>330</x>
+        <y>220</y>
+        <width>401</width>
+        <height>41</height>
        </rect>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_12">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>290</y>
-        <width>331</width>
-        <height>22</height>
+        <x>330</x>
+        <y>280</y>
+        <width>401</width>
+        <height>41</height>
        </rect>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_13">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>360</y>
-        <width>331</width>
-        <height>22</height>
+        <x>330</x>
+        <y>340</y>
+        <width>401</width>
+        <height>41</height>
        </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>240</y>
-        <width>55</width>
-        <height>16</height>
+        <x>180</x>
+        <y>230</y>
+        <width>111</width>
+        <height>21</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Хемминг</string>
@@ -521,11 +591,16 @@
      <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>180</x>
         <y>290</y>
-        <width>91</width>
-        <height>16</height>
+        <width>121</width>
+        <height>21</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Сверточный</string>
@@ -534,21 +609,52 @@
      <widget class="QLabel" name="label_12">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>360</y>
-        <width>101</width>
-        <height>16</height>
+        <x>180</x>
+        <y>340</y>
+        <width>131</width>
+        <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Качкадный</string>
+       <string>Каcкадный</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>-70</y>
+        <width>1181</width>
+        <height>741</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">image: url(:/newPrefix/bck.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <zorder>label_14</zorder>
+     <zorder>pushButton_9</zorder>
+     <zorder>lineEdit_11</zorder>
+     <zorder>lineEdit_12</zorder>
+     <zorder>lineEdit_13</zorder>
+     <zorder>label_10</zorder>
+     <zorder>label_11</zorder>
+     <zorder>label_12</zorder>
     </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="bkg.qrc"/>
+ </resources>
  <connections/>
 </ui>

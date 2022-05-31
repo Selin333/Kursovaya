@@ -112,9 +112,11 @@ class mywindow(QtWidgets.QMainWindow):
 
     def btnClicked_9(self):
         print('Декод')
-        with open('file11.txt', 'r+', encoding="utf-8") as f:
-            encoded_string = f.read()
-
+        try:
+            with open('file11.txt', 'r+', encoding="utf-8") as f:
+                encoded_string = f.read()
+        except:
+            Error('Файл не найден')
         try:
             decoded_string = test_for_kyrsach.decode_hemming(encoded_string)
             self.ui.lineEdit_11.setText(decoded_string)
@@ -216,8 +218,12 @@ def pochta_otpravka(server,user,password,recipients,subject,text,filepath):
         mail.sendmail(sender, recipients, msg.as_string())
         mail.quit()
         print('Письмо отправлено')
-        Error('Письмо отправлено'
-              )
+        done = QMessageBox()
+        done.setIcon(QMessageBox.Information)
+        done.setText("Готово")
+        done.setInformativeText('Письмо отправленно')
+        done.setWindowTitle("Отправка")
+        done.exec_()
     except:
         Error('не правильно заполнены поля'
         )
